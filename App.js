@@ -3,6 +3,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+  console.log('logi-viesti');
   return (
     <View style={styles.container}>
       <Text>App started!!</Text>
