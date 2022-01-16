@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 const Language = ({ item }) => {
   return (
-    <View style={styles.box}>
+    <View style={styles.box} testID='language'>
       <Text color="white">{item.language}</Text>
     </View>
   );

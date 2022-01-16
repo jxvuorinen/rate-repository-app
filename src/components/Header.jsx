@@ -23,10 +23,10 @@ const Header = ({ item }) => {
   return (
     <>
       <View style={styles.header}>
-        <View style={styles.repoTitle}>
+        <View style={styles.repoTitle} testID='fullName'>
           <Text fontWeight="bold" fontSize="subheading" color="textPrimary">{item.fullName}</Text>
         </View>
-        <View style={styles.repoTitle}>
+        <View style={styles.repoTitle} testID='description'>
           <Text color="textSecondary">{item.description}</Text>
         </View>
         <View style={styles.language}>
