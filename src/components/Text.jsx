@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: theme.colors.error,
-    marginTop: 3,
+    marginTop: 15,
     marginBottom: 20,
   }
 });

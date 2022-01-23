@@ -39,8 +39,8 @@ export const SignInContainer = ({ onSubmit }) => {
     >
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
-  )
-}
+  );
+};
 
 const SignInForm = ({ onSubmit }) => {
   return (

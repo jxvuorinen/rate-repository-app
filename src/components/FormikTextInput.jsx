@@ -25,6 +25,7 @@ const FormikTextInput = ({ name, placeholder }) => {
         placeholder={placeholder}
         style={styles.textInput}
         secureTextEntry={name == 'password' ? true : false}
+        multiline={name == 'review' ? true : false}
       />
       {showError && <Text style="error">{meta.error}</Text>}
     </>
