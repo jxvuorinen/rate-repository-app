@@ -39,7 +39,7 @@ const initialValues = {
   text: ''
 };
 
-export const ReviewContainer = ({ onSubmit }) => {
+const ReviewContainer = ({ onSubmit }) => {
   return (
     <Formik
       initialValues={initialValues}

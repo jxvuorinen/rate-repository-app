@@ -7,6 +7,7 @@ import theme from '../theme';
 import SignIn from './SignIn';
 import SingleRepository from './SingleRepository';
 import Review from './Review';
+import SignUp from './SignUp';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,6 +27,9 @@ const Main = () => {
       <Switch>
         <Route path='/login'>
           <SignIn />
+        </Route>
+        <Route path='/signup'>
+          <SignUp />
         </Route>
         <Route path='/repositories/:id'>
           <SingleRepository match={match} />
