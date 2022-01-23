@@ -22,10 +22,43 @@ query {
 `;
 
 export const AUTHORIZED_USER = gql`
-query {
-  authorizedUser {
-    id
-    username
+  query {
+    authorizedUser {
+      id
+      username
+    }
   }
-}
+`;
+
+
+export const GET_REPOSITORY = gql`
+  query Repository($id: ID!) {
+    repository(id: $id) {
+      id,
+      fullName,
+      description,
+      forksCount,
+      stargazersCount,
+      reviewCount,
+      ratingAverage,
+      language,
+      ownerName,
+      ownerAvatarUrl,
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      },
+    url
+    }
+  }
 `;

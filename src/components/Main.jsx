@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Redirect, Route, Switch } from 'react-router-native';
+import { Route, Switch, useRouteMatch, Redirect } from 'react-router-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
 import theme from '../theme';
 import SignIn from './SignIn';
+import SingleRepository from './SingleRepository';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +17,8 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+  let match = useRouteMatch("/repositories/:id");
+
   return (
     <View style={styles.container}>
       <AppBar />
@@ -23,7 +26,10 @@ const Main = () => {
         <Route path='/login'>
           <SignIn />
         </Route>
-        <Route path='/'>
+        <Route path='/repositories/:id'>
+          <SingleRepository match={match} />
+        </Route>
+        <Route path='/' exact>
           <RepositoryList />
         </Route>
         <Redirect to='/' />

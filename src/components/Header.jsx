@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   language: {
-    flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-start',
   }
