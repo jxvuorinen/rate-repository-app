@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, within } from '@testing-library/react-native';
-import { RepositoryListContainer } from "../components/RepositoryList";
+import { RepositoryListContainer } from '../components/RepositoryListContainer';
 import { checkCount } from '../components/Statistics';
 
 describe('RepositoryList', () => {
@@ -51,7 +51,7 @@ describe('RepositoryList', () => {
       };
 
       // Add your test code here
-      const { getAllByTestId, debug, getByText } = render(<RepositoryListContainer repositories={repositories} />);
+      const { getAllByTestId } = render(<RepositoryListContainer repositories={repositories} />);
       const repositoryItems = getAllByTestId('repositoryItem');
       const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
 
@@ -78,20 +78,20 @@ describe('RepositoryList', () => {
 
       //forks count
       const testRepository1Forks = within(firstRepositoryItem).getByTestId('forksCount');
-      const checkedForks1 = checkCount(repositories.edges[0].node.forksCount)
+      const checkedForks1 = checkCount(repositories.edges[0].node.forksCount);
       expect(testRepository1Forks).toHaveTextContent(checkedForks1);
 
       const testRepository2Forks = within(secondRepositoryItem).getByTestId('forksCount');
-      const checkedForks2 = checkCount(repositories.edges[1].node.forksCount)
+      const checkedForks2 = checkCount(repositories.edges[1].node.forksCount);
       expect(testRepository2Forks).toHaveTextContent(checkedForks2);
 
       //stargazers
       const testRepository1Stargazers = within(firstRepositoryItem).getByTestId('stargazers');
-      const checkedStars1 = checkCount(repositories.edges[0].node.stargazersCount)
+      const checkedStars1 = checkCount(repositories.edges[0].node.stargazersCount);
       expect(testRepository1Stargazers).toHaveTextContent(checkedStars1);
 
       const testRepository2Stargazers = within(secondRepositoryItem).getByTestId('stargazers');
-      const checkedStars2 = checkCount(repositories.edges[1].node.stargazersCount)
+      const checkedStars2 = checkCount(repositories.edges[1].node.stargazersCount);
       expect(testRepository2Stargazers).toHaveTextContent(checkedStars2);
 
       //rating

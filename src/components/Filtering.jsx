@@ -13,7 +13,6 @@ const Filtering = ({ queryText, setQueryText }) => {
       onChangeText={changeText}
       value={queryText}
       style={{ margin: 10 }}
-      icon='magnify'
     />
   );
 };

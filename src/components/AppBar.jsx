@@ -25,7 +25,7 @@ const AppBar = () => {
     } else if (authorizedUser === null) {
       history.push('/login');
     }
-  },[authorizedUser]);
+  },[authorizedUser, history]);
 
   return (
     <View style={styles.container}>
