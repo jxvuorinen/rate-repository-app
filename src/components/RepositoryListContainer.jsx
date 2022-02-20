@@ -1,8 +1,8 @@
 import React from 'react';
 import { FlatList, TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useHistory } from 'react-router-dom';
 import RepositoryItem from './RepositoryItem';
 import Sorter from './Sorter';
+import Filtering from './Filtering';
 
 const styles = StyleSheet.create({
   separator: {
@@ -12,30 +12,41 @@ const styles = StyleSheet.create({
 
 export const ItemSeparator = () => <View style={styles.separator} />;
 
-const RepositoryListContainer = ({ repositories, label, setSorting, setLabel }) => {
-  const history = useHistory();
+export class RepositoryListContainer extends React.Component {
 
-  const repositoryNodes = repositories
-    ? repositories.edges.map(edge => edge.node)
-    : [];
-
-  const handlePress = (id) => {
+  handlePress = (id) => {
+    const { history } = this.props;
     history.push(`/repositories/${id}`);
   };
 
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      ListHeaderComponent={<Sorter setSorting={setSorting} label={label} setLabel={setLabel} />}
-      renderItem={({ item }) => (
-        <TouchableOpacity onPress={() => handlePress(item.id)}>
-          <RepositoryItem item={item} />
-        </TouchableOpacity>
-      )}
-      keyExtractor={item => item.id}
-    />
-  );
-};
+  renderHeader = () => {
+    const { queryText, setQueryText, setSorting, label, setLabel } = this.props;
+    return (
+      <>
+        <Filtering queryText={queryText} setQueryText={setQueryText} />
+        <Sorter setSorting={setSorting} label={label} setLabel={setLabel} />
+      </>
+    );
+  };
 
-export default RepositoryListContainer;
+  render() {
+    const { repositories, history } = this.props;
+    const repositoryNodes = repositories
+      ? repositories.edges.map(edge => edge.node)
+      : [];
+
+    return (
+      <FlatList
+        data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        ListHeaderComponent={this.renderHeader}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => this.handlePress(item.id, history)}>
+            <RepositoryItem item={item} />
+          </TouchableOpacity>
+        )}
+        keyExtractor={item => item.id}
+      />
+    );
+  }
+}

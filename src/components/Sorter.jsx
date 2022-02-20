@@ -43,9 +43,9 @@ const Sorter = ({ setSorting, label, setLabel }) => {
   return (
     <View
       style={{
-        paddingTop: 20,
+        padding: 10,
         flexDirection: 'row',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
       }}>
       <Menu
         style={{ backgroundColor: "#222", borderWidth: 0.5, zIndex: 100, marginTop: 30 }}
