@@ -30,7 +30,7 @@ export class RepositoryListContainer extends React.Component {
   };
 
   render() {
-    const { repositories, history } = this.props;
+    const { repositories, history, onEndReach } = this.props;
     const repositoryNodes = repositories
       ? repositories.edges.map(edge => edge.node)
       : [];
@@ -40,6 +40,8 @@ export class RepositoryListContainer extends React.Component {
         data={repositoryNodes}
         ItemSeparatorComponent={ItemSeparator}
         ListHeaderComponent={this.renderHeader}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => this.handlePress(item.id, history)}>
             <RepositoryItem item={item} />

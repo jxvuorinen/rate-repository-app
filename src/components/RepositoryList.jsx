@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import useRepositories from '../hooks/useRepositories';
 import { RepositoryListContainer } from './RepositoryListContainer';
-import { ActivityIndicator } from 'react-native-paper';
-import { View, StyleSheet } from 'react-native';
 import { withRouter } from "react-router";
 import { useHistory } from 'react-router-native';
 import { useDebounce } from 'use-debounce';
@@ -20,16 +18,22 @@ const RepositoryList = () => {
   const [queryText, setQueryText] = useState('');
   const [searchQuery] = useDebounce(queryText, 1500);
 
-  const { repositories, loading } = useRepositories(sorting, searchQuery);
+  const variables = {
+    orderBy: sorting.orderBy,
+    orderDirection: sorting.orderDirection,
+    searchKeyword: searchQuery
+  };
+
+  const { repositories, fetchMore } = useRepositories({ 
+    first: 6,
+    ...variables
+  });
+
   const history = useHistory();
 
-  if (loading) {
-    return (
-      <View style={[styles.container, styles.horizontal]}>
-        <ActivityIndicator animating={true} size="large" />
-      </View>
-    );
-  }
+  const onEndReach = () => {
+    fetchMore();
+  };
 
   return <RepositoryListContainerWithRouter
     repositories={repositories}
@@ -39,19 +43,8 @@ const RepositoryList = () => {
     setQueryText={setQueryText}
     queryText={queryText}
     history={history}
+    onEndReach={onEndReach}
   />;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center"
-  },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10
-  }
-});
 
 export default RepositoryList;

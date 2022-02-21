@@ -71,14 +71,21 @@ const ReviewItem = ({ review }) => {
       <View style={styles.text}>
         <Text>{review.text}</Text>
       </View>
-
     </View >
   );
 };
 
 const SingleRepository = ({ match }) => {
   const id = match.params.id;
-  const { repository } = useRepository({ id });
+
+  const { repository, fetchMore } = useRepository({
+    first: 3,
+    id: id
+  });
+
+  const onEndReached = () => {
+    fetchMore();
+  };
 
   const reviews = repository
     ? repository.reviews.edges.map(edge => edge.node)
@@ -92,6 +99,8 @@ const SingleRepository = ({ match }) => {
         renderItem={({ item }) => <ReviewItem review={item} />}
         keyExtractor={({ id }) => id}
         ListHeaderComponent={() => <RepositoryInfo repository={repository} />}
+        onEndReached={onEndReached}
+        onEndReachedThreshold={0.5}
       />
     );
   } else {
